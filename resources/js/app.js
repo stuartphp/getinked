@@ -1,3 +1,6 @@
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
 require('./bootstrap');
 
 import Alpine from 'alpinejs';

@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     });
     Route::prefix('/products')->name('products.')->group(function () {
-        Route::resource('list', App\Http\Controllers\Admin\ProductsController::class);
+        Route::get('list', [App\Http\Controllers\Admin\ProductsController::class, 'index'])->name('list');
         Route::get('categories', [App\Http\Controllers\Admin\ProductsController::class, 'categories'])->name('categories');
         Route::get('units', [App\Http\Controllers\Admin\ProductsController::class, 'units'])->name('units');
     });

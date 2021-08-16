@@ -15,6 +15,25 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @can('products_access')
+                    <x-jet-nav-link href="#" :active="request()->is('products/*')" :dropdown="true" title="{{ __('Products') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bh-6 w-6" viewBox="0 0 16 16">
+                            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                        </svg>
+                        <x-slot name="children">
+                            @can('products_access')
+                            <a href="{{ route('products.list') }}">Products</a>
+                            @endcan
+                            @can('roles_access')
+                            <a href="{{ route('roles.index') }}">Roles</a>
+                            @endcan
+                            @can('permissions_access')
+                            <span class="separator"></span>
+                            <a href="{{ route('users-management.permissions') }}">Permissions</a>
+                            @endcan
+                        </x-slot>
+                    </x-jet-nav-link>
+                    @endcan
                     @can('users_management_access')
                     <x-jet-nav-link href="#" :active="request()->is('users-management/*')" :dropdown="true" title="{{ __('User Management') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,7 +58,7 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                
+
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
