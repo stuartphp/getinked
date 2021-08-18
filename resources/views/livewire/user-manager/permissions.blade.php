@@ -13,7 +13,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="flex justify-start">
+            <div class="flex justify-end">
                 <x-page-size class="w- h-9" />
                 <x-input type="search" wire:model.debounce.300ms="searchTerm"
                     class="ml-3 bg-purple-white shadow rounded border-0 h-9" placeholder="Search..." />
@@ -27,11 +27,11 @@
                         <a href="#" wire:click="sortBy('title')">
                             <div class="flex items-center">
                                 <div>Title</div>
-                                <x-icon-sort sortField="title" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                                <x-icons.sort sortField="title" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                             </div>
                         </a>
                     </th>
-                    <th class="py-3 px-6 text-center">Actions</th>
+                    <th class="py-3 px-6 text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
@@ -40,8 +40,8 @@
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             {{ $item->title }}
                         </td>
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex item-center justify-center">
+                        <td class="py-3 px-6">
+                            <div class="flex item-end justify-end">
                                 <x-edit-button component='user-manager.permissions-child' id="{{ $item->id }}" />
                                 <x-delete-button component='user-manager.permissions-child' id="{{ $item->id }}" />
                             </div>

@@ -9,16 +9,24 @@
                     </svg>
                 </a>
             </div>
-            <div class="flex justify-start">
+            <div class="flex justify-end">
                 <x-page-size class="w- h-9" />
                 <x-input type="search" wire:model.debounce.300ms="searchTerm"
                     class="ml-3 bg-purple-white shadow rounded border-0 h-9" placeholder="Search..." />
             </div>
         </div>
-    </div>
+    
     <table class="table w-full mt-3">
         <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">
+                    <a href="#" wire:click="sortBy('code')">
+                        <div class="flex items-center">
+                            <div>code</div>
+                            <x-icon-sort sortField="code" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                        </div>
+                    </a>
+                </th>
                 <th class="py-3 px-6 text-left">
                     <a href="#" wire:click="sortBy('name')">
                         <div class="flex items-center">
@@ -27,41 +35,30 @@
                         </div>
                     </a>
                 </th>
-                <th class="py-3 px-6 text-left">
-                    <a href="#" wire:click="sortBy('email')">
-                        <div class="flex items-center">
-                            <div>Email</div>
-                            <x-icon-sort sortField="email" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </th>
-                <th class="py-3 px-6 text-center">Verified</th>
-                <th class="py-3 px-6 text-center">Role</th>
-                <th class="py-3 px-6 text-center">Actions</th>
+                <th class="py-3 px-6 text-center">On Hand</th>
+                <th class="py-3 px-6 text-center">Price</th>
+                <th class="py-3 px-6 text-right">Actions</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
             @foreach ($data as $item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap">
-                        {{ $item->name }}
+                        {{ $item->code }}
                     </td>
                     <td class="py-3 px-6 text-left">
-                        {{ $item->email }}
+                        {{ $item->name }}
                     </td>
                     <td class="py-3 px-6 text-center">
-                        {{ $item->emai_verified_at }}
+                        {{ $item->on_hand }}
                     </td>
                     <td class="py-3 px-6 text-center">
-                        @foreach ($item->roles as $role )
-                        <span
-                            class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{ $role->title }}</span>
-                        @endforeach
+                        {{ $item->cost_price }}
                     </td>
-                    <td class="py-3 px-6 text-center">
-                        <div class="flex item-center justify-center">
-                            <x-edit-button component='user-manager.users-child' id="{{ $item->id }}"/>
-                            <x-delete-button component='user-manager.users-child' id="{{ $item->id }}"/>
+                    <td class="py-3 px-6 ">
+                        <div class="flex item-end justify-end">
+                            <x-edit-button component='products.index-child' id="{{ $item->id }}"/>
+                            <x-delete-button component='products.index-child' id="{{ $item->id }}"/>
                         </div>
                     </td>
                 </tr>
@@ -69,4 +66,5 @@
         </tbody>
     </table>
     {{ $data->links() }}
+    @livewire('products.index-child')
 </div>

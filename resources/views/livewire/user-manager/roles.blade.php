@@ -9,7 +9,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="flex justify-start">
+            <div class="flex justify-end">
                 <x-page-size class="w- h-9" />
                 <x-input type="search" wire:model.debounce.300ms="searchTerm"
                     class="ml-3 bg-purple-white shadow rounded border-0 h-9" placeholder="Search..." />
@@ -24,14 +24,14 @@
                                     <a href="#" wire:click="sortBy('title')">
                                         <div class="flex items-center">
                                             <div>Title</div>
-                                            <x-icon-sort sortField="title" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                                            <x-icons.sort sortField="title" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                                         </div>
                                     </a>
                                 </th>
                                 <th class="py-3 px-3 text-left">
                                     Permissions
                                 </th>
-                                <th class="py-3 px-6 text-center">Actions</th>
+                                <th class="py-3 px-6 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
@@ -47,8 +47,8 @@
                                         @endforeach
                                     </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">
-                                        <div class="flex item-center justify-center">
+                                    <td class="py-3 px-6 ">
+                                        <div class="flex item-end justify-end">
                                             <div class="w-4 mr-2">
                                                 <a href="{{ route('roles.edit', [ $item->id ]) }}" class="text-gray-700 hover:text-indigo-400">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -10,11 +10,29 @@ class Users extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['refresh' => '$refresh'];
     public $sortBy = 'name';
     public $searchTerm='';
     public $sortAsc = true;
     public $pageSize = 10;
+    protected $listeners = [
+        'showDeleteForm',
+        'showEditForm',
+    ];
+    public $confirmingItemDeletion = false;
+    public $primaryKey;
+    public $confirmingItemCreation = false;
+    public $confirmingItemEdition = false;
+    public $item;
+    public $formTitle = 'Create Record';
+
+    protected $rules = [
+        'item.name' => 'required',
+        'item.email' => 'required',
+    ];
+    protected $validationAttributes = [
+        'item.name' => ' name is required',
+        'item.email' => ' email is required',
+    ];
 
     public function updatedSearchTerm()
     {
@@ -50,5 +68,52 @@ class Users extends Component
     public function query()
     {
         return User::query();
+    }
+    public function showDeleteForm($id)
+    {
+        $this->confirmingItemDeletion = true;
+        $this->primaryKey = $id;
+    }
+
+    public function deleteItem()
+    {
+        User::destroy($this->primaryKey);
+        $this->confirmingItemDeletion = false;
+        $this->primaryKey = '';
+        $this->reset(['item']);
+        $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Record Deleted']);
+    }
+
+    public function showCreateForm()
+    {
+        $this->confirmingItemEdition = true;
+        $this->formTitle = 'Create Record';
+        $this->resetErrorBag();
+        $this->reset(['item']);
+    }
+
+    public function showEditForm(User $item)
+    {
+        $this->resetErrorBag();
+        $this->formTitle = 'Edit Record';
+        $this->item = $item;
+        $this->confirmingItemEdition = true;
+    }
+
+    public function saveItem()
+    {
+        $this->validate();
+        if($this->item->id){
+            $this->item->save();
+            $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Updated']);
+        }else{
+            Users::create([
+                'title' => $this->item['title']
+            ]);
+            $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Created']);
+        }
+        $this->confirmingItemEdition = false;
+        $this->primaryKey = '';
+
     }
 }

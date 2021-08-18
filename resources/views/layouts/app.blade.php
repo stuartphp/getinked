@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="/css/custom.css?{{ time() }}" />
 
+    @stack('css')
     @livewireStyles
 
 </head>
@@ -47,6 +48,7 @@
     @stack('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+    
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-right',
