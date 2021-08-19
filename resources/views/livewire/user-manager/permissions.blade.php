@@ -3,7 +3,7 @@
         <x-crud-header>
             <x-slot name="title"><a href="{{ route('users-management.permissions') }}">{{ __('Permissions') }}</a></x-slot>
         </x-crud-header>
-        <x-table>
+        <x-table maxWidth="md">
             <x-slot name="header">
                 <x-th>
                     <a href="#" wire:click="sortBy('title')">
@@ -30,8 +30,11 @@
                 </tr>
             @endforeach
             </x-slot>
+            <x-slot name="footer">
+                {{ $data->links() }}
+            </x-slot>
         </x-table>
-    {{ $data->links() }}
+
     </div>
     <x-confirmation-modal maxWidth="sm" wire:model="confirmingItemDeletion">
         <x-slot name="title">Delete</x-slot>

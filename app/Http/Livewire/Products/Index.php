@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Products;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductUnit;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -27,6 +28,7 @@ class Index extends Component
     public $item;
     public $formTitle = 'Create Record';
     public $catagories;
+    public $units;
 
     public function rules(){
         return [
@@ -42,6 +44,12 @@ class Index extends Component
             'item.is_feature'=>'boolean',
             'item.is_service'=>'boolean',
             'item.is_active' =>'boolean',
+            'item.product_unit_id'=>'required',
+            'item.deductable'=>'required',
+            'item.retail_price'=>['required', 'numeric'],
+            'item.special_price'=>'numeric',
+            'item.special_from'=>'date',
+            'item.special_to'=>'date',
         ];
     }
     protected $validationAttributes = [
@@ -54,11 +62,18 @@ class Index extends Component
         'item.on_hand' => 'on hand',
         'item.product_category_id' => 'category',
         'item.cost_price' => 'cost price',
+        'item.product_unit_id'=>'unit',
+        'item.deductable'=>'deductable',
+        'item.retail_price'=>'retail price',
+        'item.special_price'=>'special price',
+        'item.special_from'=>'special from',
+        'item.special_to'=>'special to',
     ];
 
     public function mount()
     {
         $this->catagories = ProductCategory::orderBy('parent_id')->orderBy('name')->where('is_active', 1)->get();
+        $this->units = ProductUnit::orderBy('name')->pluck('name', 'id')->toArray();
     }
     public function updatedSearchTerm()
     {
@@ -147,7 +162,13 @@ class Index extends Component
                 'cost_price'=>$this->item['cost_price'],
                 'is_feature'=>isset($this->item['is_feature']) ? 1:0,
                 'is_service'=>isset($this->item['is_service']) ? 1:0,
-                'is_active'=>isset($this->item['is_active'])? 1:0
+                'is_active'=>isset($this->item['is_active'])? 1:0,
+                'product_unit_id'=>$this->item['product_unit_id'],
+                'deductable'=>$this->item['deductable'],
+                'retail_price'=>$this->item['retail price'],
+                'special_price'=>$this->item['special price'],
+                'special_from'=>$this->item['special from'],
+                'special_to'=>$this->item['special to'],
             ]);
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Created']);
         }

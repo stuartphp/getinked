@@ -46,15 +46,19 @@
                     </td>
                     <td class="py-3 px-6 ">
                         <div class="flex item-end justify-end">
-                            <x-edit-button component='products.index-child' id="{{ $item->id }}"/>
-                            <x-delete-button component='products.index-child' id="{{ $item->id }}"/>
+                            <x-edit-button id="{{ $item->id }}"/>
+                            <x-image-button id="{{ $item->id }}"/>
+                            <x-delete-button id="{{ $item->id }}"/>
                         </div>
                     </td>
                 </tr>
             @endforeach
             </x-slot>
+            <x-slot name="footer">
+                {{ $data->links() }}
+            </x-slot>
         </x-table>
-    {{ $data->links() }}
+
     <x-confirmation-modal wire:model="confirmingItemDeletion">
         <x-slot name="title">Delete</x-slot>
         <x-slot name="content">Are you sure you want to delete this record?</x-slot>
@@ -68,7 +72,7 @@
         </x-slot>
     </x-confirmation-modal>
 
-    <x-dialog-modal wire:model="confirmingItemEdition" maxWidth="2xl">
+    <x-dialog-modal wire:model="confirmingItemEdition" maxWidth="5xl">
         <x-slot name="title">
             {{ $formTitle }}
         </x-slot>

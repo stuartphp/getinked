@@ -15,9 +15,10 @@ class CreateProductActivitiesTable extends Migration
     {
         Schema::create('product_activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_option_id')->constrained();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('action_date');
             $table->string('reason');
+            $table->integer('quantity');
             $table->text('note')->nullable();
             $table->timestamps();
         });

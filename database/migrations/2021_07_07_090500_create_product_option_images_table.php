@@ -13,9 +13,9 @@ class CreateProductOptionImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_option_images', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_option_id')->constrained();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->unsignedTinyInteger('sort_order')->default(2);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateProductOptionImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_option_images');
+        Schema::dropIfExists('product_images');
     }
 }

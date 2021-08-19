@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-3 gap-4">
     <div class="mt-4">
         <x-label class="mb-1">Category</x-label>
         <select wire:model.defer="item.product_category_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
@@ -31,22 +31,23 @@
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.slug" />
         <x-error key="item.slug"/>
     </div>
+    <div class="mt-4">
+        <x-label>Short Description</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
+        <x-error key="item.short_description"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Keywords</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
+        <x-error key="item.keywords"/>
+    </div>
 </div>
-<div class="mt-4">
-    <x-label>Short Description</x-label>
-    <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
-    <x-error key="item.short_description"/>
-</div>
-<div class="mt-4">
-    <x-label>Keywords</x-label>
-    <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
-    <x-error key="item.keywords"/>
-</div>
+
 <div class="mt-4">
     <x-label>Description</x-label>
     <x-textarea id="description" wire:model.defer="item.description"/>
 </div>
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-3 gap-4">
     <div class="mt-4">
         <x-label>On Hand</x-label>
         <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.on_hand" />
@@ -56,6 +57,47 @@
         <x-label>Cost Price</x-label>
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
         <x-error key="item.cost_price"/>
+    </div>
+    <div class="mt-4">
+        <x-label class="mb-1">Unit</x-label>
+        <select wire:model.defer="item.product_unit_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
+            <option value="">Select</option>
+
+            @foreach ($units as $k=>$v )
+                <option value="{{ $k }}">{{ $v }}</option>
+            @endforeach
+        </select>
+        <x-error key="item.product_unit_id"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Retail Price</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
+        <x-error key="item.cost_price"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Deductable</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.deductable" />
+        <x-error key="item.deductable"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Retail Price</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.retail_price" />
+        <x-error key="item.retail_price"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Special Price</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.special_price" />
+        <x-error key="item.special_price"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Special Start</x-label>
+        <x-input-date class="block mt-1 w-full" type="text" wire:model.defer="item.special_from" />
+        <x-error key="item.special_price"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Special End</x-label>
+        <x-input-date class="block mt-1 w-full" type="text" wire:model.defer="item.special_to" />
+        <x-error key="item.special_to"/>
     </div>
 </div>
 <div class="grid grid-cols-3 gap-4">

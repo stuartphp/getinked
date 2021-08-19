@@ -56,9 +56,12 @@
                 </tr>
             @endforeach
             </x-slot>
+            <x-slot name="footer">
+                {{ $data->links() }}
+            </x-slot>
         </x-table>
 
-                {{ $data->links() }}
+                
     </div>
             <form action="{{ route('roles.destroy', [$primaryKey]) }}" id="DelForm" method="POST"
             enctype="multipart/form-data">

@@ -57,9 +57,10 @@
                     </tr>
                 @endforeach
             </x-slot>
+            <x-slot name="footer">
+                {{ $data->links() }}
+            </x-slot>
         </x-table>
-
-        {{ $data->links() }}
     </div>
 
     <x-confirmation-modal wire:model="confirmingItemDeletion">
