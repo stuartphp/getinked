@@ -11,4 +11,12 @@ class ProductsController extends Controller
     {
         return view('products.list');
     }
+    public function categories()
+    {
+        return view('products.categories');
+    }
+    public function units()
+    {
+        return view('products.units');
+    }
 }

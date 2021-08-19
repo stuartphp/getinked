@@ -28,22 +28,22 @@ class CategorySeeder extends Seeder
             [
                 'name'=>'Dynamic',
                 'parent_id' =>2,
-                'slug' =>'inks-dynamic',
+                'slug' =>'dynamic',
             ],
             [
                 'name'=>'Eternal',
                 'parent_id' =>2,
-                'slug' =>'inks-eternal',
+                'slug' =>'eternal',
             ],
             [
                 'name'=>'Kuro Sumi',
                 'parent_id' =>2,
-                'slug' =>'inks-kuro-sumi',
+                'slug' =>'kuro-sumi',
             ],
             [
                 'name'=>'World Famouse',
                 'parent_id' =>2,
-                'slug' =>'inks-world-famouse',
+                'slug' =>'world-famouse',
             ],
             [ //3
                 'name'=>'Needles',
@@ -53,22 +53,22 @@ class CategorySeeder extends Seeder
             [
                 'name'=>'Round Liner',
                 'parent_id' =>7,
-                'slug' =>'needles-round-liner',
+                'slug' =>'round-liner',
             ],
             [
                 'name'=>'Round Shader',
                 'parent_id' =>7,
-                'slug' =>'needles-round-shader',
+                'slug' =>'round-shader',
             ],
             [
-                'name'=>'Flat',
+                'name'=>'Flat Shaders',
                 'parent_id' =>7,
-                'slug' =>'needles-flat',
+                'slug' =>'flat-shaders',
             ],
             [
                 'name'=>'Magnum',
                 'parent_id' =>7,
-                'slug' =>'needles-magnum',
+                'slug' =>'magnum',
             ],
         ]);
     }

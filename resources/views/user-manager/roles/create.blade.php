@@ -1,11 +1,12 @@
 <x-app-layout>
-    <x-crud-header :search="false">
-        <x-slot name="title"><a href="{{ route('roles.index') }}">{{ __('Roles') }}</a></x-slot>
-        <x-slot name="link"><x-secondary-button onclick="window.location.href='{{ route('roles.create') }}'" class="w-20" >
-            Create</x-secondary-button></x-slot>
+    <div class="py-2 px-2">
+        <div class="bg-white rounded-lg shadow-md p-5">
+    <x-crud-header create="false" search="false">
+        <x-slot name="title"><a href="{{ route('roles.index') }}">{{ __('Roles') }}</a> / Create New</x-slot>
     </x-crud-header>
+
     <div class="overflow-x-auto">
-        <div class="min-w-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+        <div class="min-w-screen flex items-center justify-center font-sans overflow-hidden">
             <div class="w-full lg:w-4/6">
                 <div class="bg-white shadow-md rounded my-6 py-3 px-3">
                     <form action="{{ route('roles.store') }}" method="POST"
@@ -35,6 +36,8 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
         </div>
     </div>
 </x-app-layout>

@@ -24,9 +24,9 @@ class CreateProductTable extends Migration
             $table->string('keywords');
             $table->integer('on_hand');
             $table->unsignedInteger('cost_price');
-            $table->string('is_service');
-            $table->string('is_active');
-            $table->string('is_feature');
+            $table->boolean('is_service')->default(0);
+            $table->boolean('is_active')->default(1);
+            $table->boolean('is_feature')->default(0);
             $table->timestamps();
         });
     }

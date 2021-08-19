@@ -30,7 +30,23 @@ class PermissionSeeder extends Seeder
             'permissions_create',
             'permissions_read',
             'permissions_update',
-            'permissions_delete'
+            'permissions_delete',
+            'products_access',
+            'products_create',
+            'products_read',
+            'products_update',
+            'products_delete',
+            'product_categories_access',
+            'product_categories_create',
+            'product_categories_read',
+            'product_categories_update',
+            'product_categories_delete',
+            'product_units_access',
+            'product_units_create',
+            'product_units_read',
+            'product_units_update',
+            'product_units_delete',
+
 
         ];
         foreach($permissions as $permission)

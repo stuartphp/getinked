@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\UserManager;
+namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
-use App\Models\User;
 use Livewire\WithPagination;
+use App\Models\ProductCategory;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
-class Users extends Component
+class Categories extends Component
 {
     use WithPagination;
-
     public $sortBy = 'name';
     public $searchTerm='';
     public $sortAsc = true;
@@ -23,19 +24,26 @@ class Users extends Component
     public $confirmingItemCreation = false;
     public $confirmingItemEdition = false;
     public $item;
+    public $catagories;
     public $formTitle = 'Create Record';
 
-    protected $rules = [
-        'item.name' => 'required',
-        'item.email' => 'required',
-        'item.password' => 'string',
-        'item.is_active' => 'boolean'
-    ];
+    public function rules(){
+        return [
+            'item.name' => 'required',
+            'item.slug' => ['required', Rule::unique('product_categories', 'slug')->ignore($this->primaryKey)],
+            'item.parent_id' => 'numeric',
+            'item.is_active' => 'boolean',
+        ];
+    }
     protected $validationAttributes = [
-        'item.name' => ' name is required',
-        'item.email' => ' email is required',
+        'item.name' => ' name',
+        'item.slug' => ' slug',
     ];
 
+    public function mount()
+    {
+        $this->catagories = ProductCategory::orderBy('parent_id')->orderBy('name')->where('is_active', 1)->get();
+    }
     public function updatedSearchTerm()
     {
         $this->resetPage();
@@ -45,18 +53,13 @@ class Users extends Component
         $this->resetPage();
     }
 
-    public function render()
+    public function updated($item,$val)
     {
-        $data = $this->query()
-            ->with('roles')
-            ->when($this->searchTerm, function($q){
-                $q->where('name', 'like', '%'.$this->searchTerm.'%')
-                    ->orWhere('email', 'like', '%'.$this->searchTerm.'%');
-            })
-            ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
-            ->paginate($this->pageSize);
 
-        return view('livewire.user-manager.users', ['data'=>$data]);
+        if($item=='item.name')
+        {
+            $this->item['slug'] = Str::slug($val);
+        }
     }
 
     public function sortBy($field)
@@ -69,7 +72,17 @@ class Users extends Component
 
     public function query()
     {
-        return User::query();
+        return ProductCategory::query();
+    }
+    public function render()
+    {
+        $data = $this->query()
+            ->when($this->searchTerm, function($q){
+                $q->where('name', 'like', '%'.$this->searchTerm.'%');
+            })
+            ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
+            ->paginate($this->pageSize);
+        return view('livewire.products.categories', ['data'=>$data]);
     }
     public function showDeleteForm($id)
     {
@@ -79,7 +92,7 @@ class Users extends Component
 
     public function deleteItem()
     {
-        User::destroy($this->primaryKey);
+        ProductCategory::destroy($this->primaryKey);
         $this->confirmingItemDeletion = false;
         $this->primaryKey = '';
         $this->reset(['item']);
@@ -94,31 +107,28 @@ class Users extends Component
         $this->reset(['item']);
     }
 
-    public function showEditForm(User $item)
+    public function showEditForm(ProductCategory $item)
     {
         $this->resetErrorBag();
         $this->formTitle = 'Edit Record';
         $this->item = $item;
+        $this->primaryKey = $this->item->id;
         $this->confirmingItemEdition = true;
     }
 
     public function saveItem()
     {
         $this->validate();
-        if($this->item->id){
-            if($this->item->password > '')
-            {
-                $this->item->password = decrypt($this->item->password);
-            }else{
-                unset($this->item->password);
-            }
+
+        if($this->primaryKey>0){
             $this->item->save();
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Updated']);
         }else{
-            Users::create([
-                'name' => $this->item['name'],
-                'email' => $this->item['email'],
-                'password' => decrypt($this->item['password']),
+            ProductCategory::create([
+                'name'=>$this->item['name'],
+                'parent_id'=>$this->item['parent_id'],
+                'slug'=>$this->item['slug'],
+                'is_active'=>$this->item['is_active']
             ]);
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Created']);
         }
