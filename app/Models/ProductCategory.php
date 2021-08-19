@@ -15,4 +15,14 @@ class ProductCategory extends Model
         'slug',
         'is_active'
     ];
+
+    public function parent()
+    {
+        return $this->hasOne(ProductCategory::class, 'id', 'parent_id');
+    }
+
+    public function product()
+    {
+        $this->belongsTo(Product::class);
+    }
 }

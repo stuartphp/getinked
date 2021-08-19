@@ -1,6 +1,6 @@
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-2 gap-4">
     <div class="mt-4">
-        <x-jet-label class="mb-1">Category</x-jet-label>
+        <x-label class="mb-1">Category</x-label>
         <select wire:model.defer="item.product_category_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
             <option value="">Select</option>
             @foreach ($catagories as $cat)
@@ -16,57 +16,66 @@
         </select>
     </div>
     <div class="mt-4">
-        <x-jet-label>Code</x-jet-label>
-        <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.code" />
+        <x-label>Code</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.code" />
         <x-error key="item.code"/>
     </div>
     <div class="mt-4">
-        <x-jet-label>Name</x-jet-label>
-        <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.name" />
+        <x-label>Name</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.name" />
         <x-error key="item.name"/>
     </div>
 
     <div class="mt-4">
-        <x-jet-label>Slug</x-jet-label>
-        <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.slug" />
+        <x-label>Slug</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.slug" />
         <x-error key="item.slug"/>
     </div>
-    <div class="mt-4">
-        <x-jet-label>Short Description</x-jet-label>
-        <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
-    </div>
-    <div class="mt-4">
-        <x-jet-label>Keywords</x-jet-label>
-        <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
-    </div>
 </div>
 <div class="mt-4">
-    <x-jet-label>Description</x-jet-label>
-    <x-textarea id="{{ $des }}"/>
+    <x-label>Short Description</x-label>
+    <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
+    <x-error key="item.short_description"/>
+</div>
+<div class="mt-4">
+    <x-label>Keywords</x-label>
+    <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
+    <x-error key="item.keywords"/>
+</div>
+<div class="mt-4">
+    <x-label>Description</x-label>
+    <x-textarea id="description" wire:model.defer="item.description"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+    <div class="mt-4">
+        <x-label>On Hand</x-label>
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.on_hand" />
+        <x-error key="item.on_hand"/>
+    </div>
+    <div class="mt-4">
+        <x-label>Cost Price</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
+        <x-error key="item.cost_price"/>
+    </div>
 </div>
 <div class="grid grid-cols-3 gap-4">
-<div class="mt-4">
-    <x-jet-label>On Hand</x-jet-label>
-    <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.on_hand" />
+    <div class="mt-4">
+        <label for="is_feature" class="flex items-center">
+            <x-checkbox id="is_feature" wire:model.defer="item.is_feature" />
+            <span class="ml-2 text-sm text-gray-600">{{ __('Is Feature') }}</span>
+        </label>
+    </div>
+    <div class="mt-4">
+        <label for="is_service" class="flex items-center">
+            <x-checkbox id="is_service" wire:model.defer="item.is_service" />
+            <span class="ml-2 text-sm text-gray-600">{{ __('Is Service') }}</span>
+        </label>
+    </div>
+    <div class="mt-4">
+        <label for="is_active" class="flex items-center">
+            <x-checkbox id="is_active" wire:model.defer="item.is_active" />
+            <span class="ml-2 text-sm text-gray-600">{{ __('Is Active') }}</span>
+        </label>
+    </div>
 </div>
-<div class="mt-4">
-    <x-jet-label>Cost Price</x-jet-label>
-    <x-jet-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
-</div>
-<div class="mt-4">
-    <x-jet-label>Is Service</x-jet-label>
-    <select wire:model.defer="item.is_service" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-    </select>
-</div>
-<div class="mt-4">
-    <x-jet-label>Is Active</x-jet-label>
-    <select wire:model.defer="item.is_active" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-    </select>
-</div>
-</div>
+

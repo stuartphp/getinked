@@ -41,20 +41,20 @@
 </div>
 
     @stack('modals')
-    <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
     <!-- Scripts -->
     @livewireScripts
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}?{{ time() }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script>
-    
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-right',
         showConfirmButton: false,
         showCloseButton: true,
-        timer: 3000,
+        timer: 2500,
         timerProgressBar:true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)

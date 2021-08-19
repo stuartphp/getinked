@@ -24,12 +24,11 @@
                             @can('products_access')
                             <a href="{{ route('products.list') }}">Products</a>
                             @endcan
-                            @can('roles_access')
-                            <a href="{{ route('roles.index') }}">Roles</a>
+                            @can('product_categories_access')
+                            <a href="{{ route('products.categories') }}">Categories</a>
                             @endcan
-                            @can('permissions_access')
-                            <span class="separator"></span>
-                            <a href="{{ route('users-management.permissions') }}">Permissions</a>
+                            @can('product_units_access')
+                            <a href="{{ route('products.units') }}">Units</a>
                             @endcan
                         </x-slot>
                     </x-jet-nav-link>
