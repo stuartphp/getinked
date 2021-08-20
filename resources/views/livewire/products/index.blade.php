@@ -5,35 +5,28 @@
         </x-crud-header>
         <x-table>
             <x-slot name="header">
-                <x-th>
-                    <a href="#" wire:click="sortBy('code')">
-                        <div class="flex items-center">
-                            <div>code</div>
-                            <x-icons.sort sortField="code" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
+                <x-th-sort field="code">
+                    <div>code</div>
+                    <x-icons.sort sortField="code" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                 </x-th>
-                <x-th>
-                    <a href="#" wire:click="sortBy('name')">
-                        <div class="flex items-center">
-                            <div>Name</div>
-                            <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </x-th>
+                <x-th-sort field="name">
+                    <div>Name</div>
+                     <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                </x-th-sort>
                 <x-th>Category</x-th>
-                <x-th>On Hand</x-th>
-                <x-th>Price</x-th>
-                <x-th>Actions</x-th>
+                <x-th class="text-center">On Hand</x-th>
+                <x-th class="text-center">Cost Price</x-th>
+                <x-th class="text-center">Retail Price</x-th>
+                <x-th></x-th>
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <tr class="border-b border-gray-200 hover:bg-gray-100 @if($item->is_active == 0) text-red-400 @endif">
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                         {{ $item->code }}
                     </td>
                     <td class="py-3 px-6 text-left">
-                        {{ $item->name }}
+                        {{  $item->name }}
                     </td>
                     <td class="py-3 px-6 text-left">
                         {{ $item->category->name }}
@@ -41,15 +34,23 @@
                     <td class="py-3 px-6 text-center">
                         {{ $item->on_hand }}
                     </td>
-                    <td class="py-3 px-6 text-center">
-                        {{ $item->cost_price }}
+                    <td class="py-3 px-6 text-right">
+                        {{ number_format($item->cost_price/100, 2) }}
                     </td>
-                    <td class="py-3 px-6 ">
+                    <td class="py-3 px-6 text-right">
+                        {{ number_format($item->retail_price/100, 2) }}
+                    </td>
+                    <td class="py-3 px-6">
                         <div class="flex item-end justify-end">
-                            <x-edit-button id="{{ $item->id }}"/>
-                            <x-image-button id="{{ $item->id }}"/>
-                            <x-delete-button id="{{ $item->id }}"/>
+
+                            <x-action-dropdown id="{{ $item->id }}">
+                                <x-action-link id="{{ $item->id}}" link="copy"/>
+                                <x-action-link id="{{ $item->id}}" link="edit"/>
+                                <x-action-link id="{{ $item->id}}" link="images"/>
+                                <x-action-link id="{{ $item->id}}" link="delete"/>
+                            </x-action-dropdown>
                         </div>
+
                     </td>
                 </tr>
             @endforeach

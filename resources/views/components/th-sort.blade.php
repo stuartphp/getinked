@@ -1,9 +1,8 @@
-@props(['field', 'title', 'sortBy'=>'', 'sortAsc'=>''])
+@props(['field'])
 <th class="py-3 px-6 text-left">
-    <a href="#" wire:click="sortBy('{{ $field }}')">
+    <a href="#" wire:click="sortBy('{{ $field }}')" class=" underline hover:text-indigo-500">
         <div class="flex items-center">
-            <div>{{ $title }}</div>
-            <x-icons.sort sortField="{{ $field }}" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+            {{ $slot }}
         </div>
     </a>
 </th>

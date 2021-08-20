@@ -5,18 +5,14 @@
         </x-crud-header>
         <x-table>
             <x-slot name="header">
-                <x-th>
-                    <a href="#" wire:click="sortBy('name')">
-                        <div class="flex items-center">
-                            <div>Name</div>
-                            <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </x-th>
+                <x-th-sort field="name">
+                    <div>Name</div>
+                    <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                </x-th-sort>
                 <x-th>Slug</x-th>
                 <x-th>Parent</x-th>
                 <x-th class="text-center">Is Active</x-th>
-                <x-th class="text-right">Action</x-th>
+                <x-th></x-th>
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
@@ -33,10 +29,12 @@
                         <td class="py-3 px-6 text-center">
                             {{ ($item->is_active==0) ? 'No' : 'Yes' }}
                         </td>
-                        <td class="py-3 px-6 text-right">
+                        <td class="py-3 px-6 ">
                             <div class="flex items-end justify-end">
-                                <x-edit-button id="{{ $item->id }}"/>
-                                <x-delete-button id="{{ $item->id }}"/>
+                                <x-action-dropdown id="{{ $item->id }}">
+                                    <x-action-link id="{{ $item->id}}" link="edit"/>
+                                    <x-action-link id="{{ $item->id}}" link="delete"/>
+                                </x-action-dropdown>
                             </div>
                         </td>
                     </tr>
@@ -46,7 +44,7 @@
                 {{ $data->links() }}
             </x-slot>
         </x-table>
-    
+
     </div>
     <x-confirmation-modal wire:model="confirmingItemDeletion">
         <x-slot name="title">Delete</x-slot>
