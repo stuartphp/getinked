@@ -6,26 +6,18 @@
     </x-crud-header>
         <x-table>
             <x-slot name="header">
-                <x-th>
-                    <a href="#" wire:click="sortBy('name')">
-                        <div class="flex items-center">
-                            <div>Name</div>
-                            <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </x-th>
-                <th class="py-3 px-6 text-left">
-                    <a href="#" wire:click="sortBy('email')">
-                        <div class="flex items-center">
-                            <div>Email</div>
-                            <x-icons.sort sortField="email" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </th>
+                <x-th-sort field="name">
+                    <div>Name</div>
+                    <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                </x-th-sort>
+                <x-th-sort field="email">
+                    <div>Email</div>
+                    <x-icons.sort sortField="email" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                </x-th-sort>
                 <x-th>Is Active</x-th>
                 <x-th>Verified</x-th>
                 <x-th>Role</x-th>
-                <x-th class="text-right">Actions</x-th>
+                <x-th></x-th>
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
@@ -48,10 +40,12 @@
                                 class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{ $role->title }}</span>
                             @endforeach
                         </td>
-                        <td class="py-3 px-6 text-right">
+                        <td class="py-3 px-6">
                             <div class="flex items-end justify-end">
-                                <x-edit-button id="{{ $item->id }}"/>
-                                <x-delete-button id="{{ $item->id }}"/>
+                                <x-action-dropdown id="{{ $item->id }}">
+                                    <x-action-link id="{{ $item->id}}" link="edit"/>
+                                    <x-action-link id="{{ $item->id}}" link="delete"/>
+                                </x-action-dropdown>
                             </div>
                         </td>
                     </tr>

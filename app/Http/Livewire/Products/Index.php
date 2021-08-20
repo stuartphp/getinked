@@ -31,10 +31,10 @@ class Index extends Component
     public $units;
 
     public function rules(){
-        return [
-            'item.code'=>'required',
+        $rules = [
+            'item.code'=>['required',  Rule::unique('products', 'code')->ignore($this->primaryKey)],
             'item.name' => 'required',
-            'item.slug' => ['required', Rule::unique('product_categories', 'slug')->ignore($this->primaryKey)],
+            'item.slug' => ['required', Rule::unique('products', 'slug')->ignore($this->primaryKey)],
             'item.short_description'=>'required',
             'item.description'=>'required',
             'item.keywords'=>'required',
@@ -51,7 +51,10 @@ class Index extends Component
             'item.special_from'=>'date',
             'item.special_to'=>'date',
         ];
+
+        return $rules;
     }
+
     protected $validationAttributes = [
         'item.code' => 'code',
         'item.name' => 'name',
@@ -75,13 +78,23 @@ class Index extends Component
         $this->catagories = ProductCategory::orderBy('parent_id')->orderBy('name')->where('is_active', 1)->get();
         $this->units = ProductUnit::orderBy('name')->pluck('name', 'id')->toArray();
     }
+
     public function updatedSearchTerm()
     {
         $this->resetPage();
     }
+
     public function updatedPageSize()
     {
         $this->resetPage();
+    }
+
+    public function updated($item,$val)
+    {
+        if($item=='item.name')
+        {
+            $this->item['slug'] = Str::slug($val);
+        }
     }
 
     public function sortBy($field)
@@ -109,6 +122,7 @@ class Index extends Component
            // dd($data);
         return view('livewire.products.index', ['data'=>$data]);
     }
+
     public function showDeleteForm($id)
     {
         $this->confirmingItemDeletion = true;
@@ -142,11 +156,29 @@ class Index extends Component
         $this->confirmingItemEdition = true;
     }
 
+    public function copyItemForm(Product $item)
+    {
+        $this->resetErrorBag();
+        $this->formTitle = 'Create Record';
+        $this->item = $item;
+        $this->item['code']='';
+        $this->item['special_price']=NULL;
+        $this->item['special_from']= NULL;
+        $this->item['special_to']= NULL;
+        $this->confirmingItemEdition = true;
+    }
+
     public function saveItem()
     {
         $this->validate();
 
         if($this->primaryKey>0){
+            if($this->item['special_price'] == '')
+            {
+                $this->item['special_price'] = NULL;
+                $this->item['special_from'] = NULL;
+                $this->item['special_to'] = NULL;
+            }
             $this->item->save();
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Updated']);
         }else{
@@ -165,15 +197,14 @@ class Index extends Component
                 'is_active'=>isset($this->item['is_active'])? 1:0,
                 'product_unit_id'=>$this->item['product_unit_id'],
                 'deductable'=>$this->item['deductable'],
-                'retail_price'=>$this->item['retail price'],
-                'special_price'=>$this->item['special price'],
-                'special_from'=>$this->item['special from'],
-                'special_to'=>$this->item['special to'],
+                'retail_price'=>$this->item['retail_price'],
+                'special_price'=>isset($this->item['special_price'])? $this->item['special_price'] : NULL,
+                'special_from'=>isset($this->item['special_from']) ? $this->item['special_from']: NULL,
+                'special_to'=>isset($this->item['special_to']) ? $this->item['special_to']: NULL,
             ]);
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Successfully Created']);
         }
         $this->confirmingItemEdition = false;
         $this->primaryKey = '';
-
     }
 }

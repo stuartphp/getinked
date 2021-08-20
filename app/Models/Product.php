@@ -37,14 +37,12 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class,  'product_category_id');
     }
+    
     public function unit()
     {
         return $this->hasOne(ProductUnit::class);
     }
-    public function options()
-    {
-        return $this->hasMany(ProductOption::class);
-    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);

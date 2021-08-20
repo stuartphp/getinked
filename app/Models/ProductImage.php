@@ -11,10 +11,11 @@ class ProductImage extends Model
     protected $table = 'product_images';
 
     protected $fillable =[
-        'product_option_id',
+        'product_id',
         'name',
         'sort_order'
     ];
+    
     public function product()
     {
         return $this->belongsTo(Product::class);

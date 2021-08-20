@@ -5,15 +5,11 @@
         </x-crud-header>
         <x-table maxWidth="md">
             <x-slot name="header">
-                <x-th>
-                    <a href="#" wire:click="sortBy('name')">
-                        <div class="flex items-center">
-                            <div>Name</div>
-                            <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
-                        </div>
-                    </a>
-                </x-th>
-                <x-th class="text-right">Action</x-th>
+                <x-th-sort field="name">
+                    <div>Name</div>
+                    <x-icons.sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                </x-th-sort>
+                <x-th></x-th>
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
@@ -21,10 +17,12 @@
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             {{ $item->name }}
                         </td>
-                        <td class="py-3 px-6 text-right">
+                        <td class="py-3 px-6">
                             <div class="flex items-end justify-end">
-                                <x-edit-button id="{{ $item->id }}"/>
-                                <x-delete-button id="{{ $item->id }}"/>
+                                <x-action-dropdown id="{{ $item->id }}">
+                                    <x-action-link id="{{ $item->id}}" link="edit"/>
+                                    <x-action-link id="{{ $item->id}}" link="delete"/>
+                                </x-action-dropdown>
                             </div>
                         </td>
                     </tr>

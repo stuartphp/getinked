@@ -1,5 +1,5 @@
 <div class="grid grid-cols-3 gap-4">
-    <div class="mt-4">
+    <div>
         <x-label class="mb-1">Category</x-label>
         <select wire:model.defer="item.product_category_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
             <option value="">Select</option>
@@ -15,50 +15,22 @@
             @endforeach
         </select>
     </div>
-    <div class="mt-4">
+    <div>
         <x-label>Code</x-label>
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.code" />
         <x-error key="item.code"/>
     </div>
-    <div class="mt-4">
+    <div>
         <x-label>Name</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.name" />
+        <x-input class="block mt-1 w-full" type="text" wire:model="item.name" />
         <x-error key="item.name"/>
     </div>
-
-    <div class="mt-4">
+    <div>
         <x-label>Slug</x-label>
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.slug" />
         <x-error key="item.slug"/>
     </div>
-    <div class="mt-4">
-        <x-label>Short Description</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
-        <x-error key="item.short_description"/>
-    </div>
-    <div class="mt-4">
-        <x-label>Keywords</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
-        <x-error key="item.keywords"/>
-    </div>
-</div>
-
-<div class="mt-4">
-    <x-label>Description</x-label>
-    <x-textarea id="description" wire:model.defer="item.description"/>
-</div>
-<div class="grid grid-cols-3 gap-4">
-    <div class="mt-4">
-        <x-label>On Hand</x-label>
-        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.on_hand" />
-        <x-error key="item.on_hand"/>
-    </div>
-    <div class="mt-4">
-        <x-label>Cost Price</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
-        <x-error key="item.cost_price"/>
-    </div>
-    <div class="mt-4">
+    <div>
         <x-label class="mb-1">Unit</x-label>
         <select wire:model.defer="item.product_unit_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
             <option value="">Select</option>
@@ -69,10 +41,40 @@
         </select>
         <x-error key="item.product_unit_id"/>
     </div>
+    <div>
+        <x-label>On Hand</x-label>
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.on_hand" />
+        <x-error key="item.on_hand"/>
+    </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="mt-4">
+    <x-label>Short Description</x-label>
+    <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.short_description" />
+    <x-error key="item.short_description"/>
+</div>
+<div class="mt-4">
+        <x-label>Keywords</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.keywords" />
+        <x-error key="item.keywords"/>
+    </div>
+</div>
+<div class="mt-4">
+    <x-label>Description</x-label>
+    <x-textarea id="description" wire:model.defer="item.description"/>
+</div>
+<div class="grid grid-cols-3 gap-4">
+
     <div class="mt-4">
-        <x-label>Retail Price</x-label>
+        <x-label>Cost Price (c)</x-label>
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
         <x-error key="item.cost_price"/>
+    </div>
+
+    <div class="mt-4">
+        <x-label>Retail Price (c)</x-label>
+        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.retail_price" />
+        <x-error key="item.retail_price"/>
     </div>
     <div class="mt-4">
         <x-label>Deductable</x-label>
@@ -80,12 +82,7 @@
         <x-error key="item.deductable"/>
     </div>
     <div class="mt-4">
-        <x-label>Retail Price</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.retail_price" />
-        <x-error key="item.retail_price"/>
-    </div>
-    <div class="mt-4">
-        <x-label>Special Price</x-label>
+        <x-label>Special Price (c)</x-label>
         <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.special_price" />
         <x-error key="item.special_price"/>
     </div>

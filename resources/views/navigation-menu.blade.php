@@ -6,20 +6,17 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        <x-icons.dashboard class="h-6 w-6"/>
+                    </x-nav-link>
                     @can('products_access')
-                    <x-jet-nav-link href="#" :active="request()->is('products/*')" :dropdown="true" title="{{ __('Products') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bh-6 w-6" viewBox="0 0 16 16">
-                            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
-                        </svg>
+                    <x-nav-link href="#" :active="request()->is('products/*')" :dropdown="true" title="{{ __('Products') }}">
+                        <x-icons.box class="h-6 w-6"/>
                         <x-slot name="children">
                             @can('products_access')
                             <a href="{{ route('products.list') }}">Products</a>
@@ -31,13 +28,11 @@
                             <a href="{{ route('products.units') }}">Units</a>
                             @endcan
                         </x-slot>
-                    </x-jet-nav-link>
+                    </x-nav-link>
                     @endcan
                     @can('users_management_access')
-                    <x-jet-nav-link href="#" :active="request()->is('users-management/*')" :dropdown="true" title="{{ __('User Management') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
+                    <x-nav-link href="#" :active="request()->is('users-management/*')" :dropdown="true" title="{{ __('User Management') }}">
+                        <x-icons.people class="w-6 h-6"/>
                         <x-slot name="children">
                             @can('users_access')
                             <a href="{{ route('users-management.users') }}">Users</a>
@@ -50,7 +45,7 @@
                             <a href="{{ route('users-management.permissions') }}">Permissions</a>
                             @endcan
                         </x-slot>
-                    </x-jet-nav-link>
+                    </x-nav-link>
                     @endcan
 
                 </div>
@@ -60,7 +55,7 @@
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
-                    <x-jet-dropdown align="right" width="48">
+                    <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
@@ -92,14 +87,14 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
-                            </x-jet-dropdown-link>
+                            </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
+                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
-                                </x-jet-dropdown-link>
+                                </x-dropdown-link>
                             @endif
 
                             <div class="border-t border-gray-100"></div>
@@ -108,13 +103,13 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <x-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
-                                </x-jet-dropdown-link>
+                                </x-dropdown-link>
                             </form>
                         </x-slot>
-                    </x-jet-dropdown>
+                    </x-dropdown>
                 </div>
             </div>
 
@@ -137,9 +132,9 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -160,25 +155,25 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}"
+                <x-responsive-nav-link href="{{ route('profile.show') }}"
                     :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
-                </x-jet-responsive-nav-link>
+                </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}"
+                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}"
                         :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
-                    </x-jet-responsive-nav-link>
+                    </x-responsive-nav-link>
                 @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <x-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         {{ __('Log Out') }}
-                    </x-jet-responsive-nav-link>
+                    </x-responsive-nav-link>
                 </form>
 
                 <!-- Team Management -->
@@ -190,16 +185,16 @@
                     </div>
 
                     <!-- Team Settings -->
-                    <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
+                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
                         :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
-                    </x-jet-responsive-nav-link>
+                    </x-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                        <x-jet-responsive-nav-link href="{{ route('teams.create') }}"
+                        <x-responsive-nav-link href="{{ route('teams.create') }}"
                             :active="request()->routeIs('teams.create')">
                             {{ __('Create New Team') }}
-                        </x-jet-responsive-nav-link>
+                        </x-responsive-nav-link>
                     @endcan
 
                     <div class="border-t border-gray-200"></div>
@@ -210,7 +205,7 @@
                     </div>
 
                     @foreach (Auth::user()->allTeams() as $team)
-                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
+                        <x-switchable-team :team="$team" component="jet-responsive-nav-link" />
                     @endforeach
                 @endif
             </div>

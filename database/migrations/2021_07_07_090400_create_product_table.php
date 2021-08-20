@@ -24,6 +24,7 @@ class CreateProductTable extends Migration
             $table->text('description');
             $table->string('keywords');
             $table->integer('on_hand');
+            $table->integer('deductable');
             $table->unsignedInteger('cost_price');
             $table->unsignedInteger('retail_price');
             $table->unsignedInteger('special_price')->nullable();
