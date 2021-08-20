@@ -43,6 +43,7 @@
                             @can('permissions_access')
                             <span class="separator"></span>
                             <a href="{{ route('users-management.permissions') }}">Permissions</a>
+                            <a href="#">Crud</a>
                             @endcan
                         </x-slot>
                     </x-nav-link>

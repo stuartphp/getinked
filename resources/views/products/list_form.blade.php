@@ -67,23 +67,23 @@
 
     <div class="mt-4">
         <x-label>Cost Price (c)</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.cost_price" />
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.cost_price" />
         <x-error key="item.cost_price"/>
     </div>
 
     <div class="mt-4">
         <x-label>Retail Price (c)</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.retail_price" />
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.retail_price" />
         <x-error key="item.retail_price"/>
     </div>
     <div class="mt-4">
         <x-label>Deductable</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.deductable" />
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.deductable" />
         <x-error key="item.deductable"/>
     </div>
     <div class="mt-4">
         <x-label>Special Price (c)</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.special_price" />
+        <x-input class="block mt-1 w-full" type="number" wire:model.defer="item.special_price" />
         <x-error key="item.special_price"/>
     </div>
     <div class="mt-4">
