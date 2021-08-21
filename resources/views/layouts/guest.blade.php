@@ -15,7 +15,10 @@
         @livewireStyles
     </head>
     <body>
-        <div class="container h-20 bg-gray-300 mx-auto"></div>
+
+        <div class="container h-20 bg-gray-300 mx-auto">
+
+        </div>
         {{ $slot }}
 
         @stack('modals')
