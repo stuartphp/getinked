@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => "http://getinked.test",
+    'asset_url' => "https://getinked.test",
 
     /*
     |--------------------------------------------------------------------------

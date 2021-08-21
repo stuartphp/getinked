@@ -21,38 +21,32 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
-                <tr class="border-b border-gray-200 hover:bg-gray-100 @if($item->is_active == 0) text-red-400 @endif">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                        {{ $item->code }}
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        {{  $item->name }}
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        {{ $item->category->name }}
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                        {{ $item->on_hand }}
-                    </td>
-                    <td class="py-3 px-6 text-right">
-                        {{ number_format($item->cost_price/100, 2) }}
-                    </td>
-                    <td class="py-3 px-6 text-right">
-                        {{ number_format($item->retail_price/100, 2) }}
-                    </td>
-                    <td class="py-3 px-6">
+                @php
+                    if($item->is_active==0)
+                    {
+                        $class='text-red-400';
+                    }else{
+                        $class='';
+                    }
+                @endphp
+                <x-tr class="{{ $class }}">
+                    <x-td>{{ $item->code }}</x-td>
+                    <x-td>{{  $item->name }}</x-td>
+                    <x-td>{{ $item->category->name }}</x-td>
+                    <x-td class="text-center">{{ $item->on_hand }}</x-td>
+                    <x-td class="text-right">{{ number_format($item->cost_price/100, 2) }}</x-td>
+                    <x-td class="text-right">{{ number_format($item->retail_price/100, 2) }}</x-td>
+                    <x-td>
                         <div class="flex item-end justify-end">
-
-                            <x-action-dropdown id="{{ $item->id }}">
+                            <x-action-dropdown>
                                 <x-action-link id="{{ $item->id}}" link="copy"/>
                                 <x-action-link id="{{ $item->id}}" link="edit"/>
                                 <x-action-link id="{{ $item->id}}" link="images"/>
                                 <x-action-link id="{{ $item->id}}" link="delete"/>
                             </x-action-dropdown>
                         </div>
-
-                    </td>
-                </tr>
+                    </x-td>
+                </x-tr>
             @endforeach
             </x-slot>
             <x-slot name="footer">

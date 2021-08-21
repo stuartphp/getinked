@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShopComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/shop', ShopComponent::class);
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function(){ return view('dashboard'); })->name('dashboard');
     Route::prefix('/users-management')->group(function(){

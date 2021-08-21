@@ -14,6 +14,7 @@
                 @endif
             @endforeach
         </select>
+        <x-error key="item.product_category_id"/>
     </div>
     <div>
         <x-label>Code</x-label>
