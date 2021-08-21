@@ -13,19 +13,17 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                            {{ $item->name }}
-                        </td>
-                        <td class="py-3 px-6">
-                            <div class="flex items-end justify-end">
-                                <x-action-dropdown id="{{ $item->id }}">
-                                    <x-action-link id="{{ $item->id}}" link="edit"/>
-                                    <x-action-link id="{{ $item->id}}" link="delete"/>
-                                </x-action-dropdown>
-                            </div>
-                        </td>
-                    </tr>
+                <x-tr>
+                    <x-td>{{ $item->name }}</x-td>
+                    <x-td>
+                        <div class="flex items-end justify-end">
+                            <x-action-dropdown>
+                                <x-action-link id="{{ $item->id}}" link="edit"/>
+                                <x-action-link id="{{ $item->id}}" link="delete"/>
+                            </x-action-dropdown>
+                        </div>
+                    </x-td>
+                </x-tr>
                 @endforeach
             </x-slot>
             <x-slot name="footer">

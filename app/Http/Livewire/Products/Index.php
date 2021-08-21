@@ -206,6 +206,6 @@ class Index extends Component
         }
         $this->confirmingItemEdition = false;
         $this->primaryKey = '';
-        $this->mount();
+
     }
 }

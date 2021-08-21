@@ -16,26 +16,24 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($data as $item)
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                        {{ $item->title }}
-                    </td>
-                    <td class="py-3 px-6 text-left">
+                <x-tr>
+                    <x-td>{{ $item->title }}</x-td>
+                    <x-td>
                         <div class="grid lg:grid-cols-7 md:grid-cols-4 sm:grid-cols-2  gap-1">
-                        @foreach ($item->permissions as $permission)
-                            <div class="bg-purple-100 text-purple-600 py-1 px-3 rounded-full text-xs mb-3">{{ ucwords(str_replace('_', ' ',$permission->title)) }}</div>
-                        @endforeach
-                    </div>
-                    </td>
-                    <td class="py-3 px-6 ">
+                            @foreach ($item->permissions as $permission)
+                                <div class="bg-purple-100 text-purple-600 py-1 px-3 rounded-full text-xs mb-3">{{ ucwords(str_replace('_', ' ',$permission->title)) }}</div>
+                            @endforeach
+                        </div>
+                    </x-td>
+                    <x-td>
                         <div class="flex item-end justify-end">
-                            <x-action-dropdown id="{{ $item->id }}">
+                            <x-action-dropdown>
                                 <x-action-link id="{{ $item->id}}" link="edit" :route="route('roles.edit', [ $item->id ])"/>
                                 <x-action-link id="{{ $item->id}}" link="delete"/>
                             </x-action-dropdown>
                         </div>
-                    </td>
-                </tr>
+                    </x-td>
+                </x-tr>
             @endforeach
             </x-slot>
             <x-slot name="footer">
