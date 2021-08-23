@@ -1,7 +1,7 @@
 <div class="grid grid-cols-3 gap-4">
     <div>
         <x-label class="mb-1">Category</x-label>
-        <select wire:model.defer="item.product_category_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block text-sm w-full">
+        <select wire:model.defer="item.product_category_id" class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             <option value="">Select</option>
             @foreach ($catagories as $cat)
                 @if ($cat->parent_id==0)
@@ -18,7 +18,7 @@
     </div>
     <div>
         <x-label>Code</x-label>
-        <x-input class="block mt-1 w-full" type="text" wire:model.defer="item.code" />
+        <x-input class="" type="text" wire:model.defer="item.code" />
         <x-error key="item.code"/>
     </div>
     <div>

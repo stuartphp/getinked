@@ -17,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/shop', ShopComponent::class);
+Route::get('/cart', function(){ return view('cart');});
+Route::get('/shop', function(){ return view('shop');});
+Route::get('/wishlist', function(){ return view('wishlist');});
+Route::get('/account', function(){ return view('account');});
+Route::get('/profile-info', function(){ return view('profile-info');});
+Route::get('/manage-address', function(){ return view('manage-address');});
+Route::get('/change-password', function(){ return view('change-password');});
+// Route::get('/shop', ShopComponent::class);
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function(){ return view('dashboard'); })->name('dashboard');
     Route::prefix('/users-management')->group(function(){
