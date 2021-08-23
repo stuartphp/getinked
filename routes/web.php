@@ -19,14 +19,19 @@ Route::get('/', function () {
 });
 Route::get('/cart', function(){ return view('cart');});
 Route::get('/shop', function(){ return view('shop');});
-Route::get('/wishlist', function(){ return view('wishlist');});
-Route::get('/account', function(){ return view('account');});
-Route::get('/profile-info', function(){ return view('profile-info');});
-Route::get('/manage-address', function(){ return view('manage-address');});
-Route::get('/change-password', function(){ return view('change-password');});
+Route::get('/detail', function(){ return view('detail');});
+
+
 // Route::get('/shop', ShopComponent::class);
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/dashboard', function(){ return view('dashboard'); })->name('dashboard');
+    Route::prefix('customer')->group(function () {
+        Route::get('/wishlist', function(){ return view('customer/wishlist');});
+        Route::get('/account', function(){ return view('customer/account');});
+        Route::get('/profile-info', function(){ return view('customer/profile-info');});
+        Route::get('/manage-address', function(){ return view('customer/manage-address');});
+        Route::get('/change-password', function(){ return view('customer/change-password');});
+    });
+    Route::get('/dashboard', [App\Http\Controllers\LoginRedirectController::class, 'index'])->name('dashboard');
     Route::prefix('/users-management')->group(function(){
         Route::get('users', [App\Http\Controllers\Admin\UserManagerController::class, 'users'])->name('users-management.users');
         Route::resource('roles', App\Http\Controllers\Admin\RolesController::class);

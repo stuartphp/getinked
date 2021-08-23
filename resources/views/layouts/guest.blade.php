@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>GetInked Tattoo and Piercing Supplies @yield('title')</title>
+        <meta name="description" content="@yield('description', 'GetInked Tattoo Supplies, South Africa Number 1 Tattoo and Piercing Supply Specialist. We source the best quality products for the professional tattoo artist.')">
+        <meta name="robots" content="index, follow">
+        <link rel="canconical" href="{{ request()->fullUrl() }}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <!-- Styles -->
@@ -166,7 +169,7 @@
                     title:message
                 })
             })
-           
+
     let menuBar = document.querySelector('#menuBar')
     let mobileMenu = document.querySelector('#mobileMenu')
     let closeMenu = document.querySelector('#closeMenu')

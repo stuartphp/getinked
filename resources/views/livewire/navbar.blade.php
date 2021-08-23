@@ -42,7 +42,7 @@
                 </div>
                 <div class="text-xs leading-3">Cart</div>
             </a>
-            <a href="/account" class="block text-center text-gray-700 hover:text-primary transition">
+            <a href="/customer/account" class="block text-center text-gray-700 hover:text-primary transition">
                 <div class="text-2xl">
                     <i class="far fa-user"></i>
                 </div>
@@ -115,9 +115,14 @@
                     <a href="/about" class="text-gray-200 hover:text-white transition">About us</a>
                     <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
                 </div>
-                <a href="/login" class="ml-auto justify-self-end text-gray-200 hover:text-white transition">
-                    Login/Register
-                </a>
+                @guest
+                    <a href="/login" class="ml-auto justify-self-end text-gray-200 hover:text-white transition">
+                        Login/Register
+                    </a>
+                @else
+                    <span class="ml-auto justify-self-end text-gray-200">{{ auth()->user()->name }}</span>
+                @endguest
+
             </div>
             <!-- nav menu end -->
 
